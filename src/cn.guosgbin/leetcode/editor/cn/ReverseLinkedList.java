@@ -61,17 +61,34 @@ public class ReverseLinkedList {
 //            return sentinelNode.next;
 //        }
 
+//        /**
+//         * 递归
+//         */
+//        public ListNode reverseList(ListNode head) {
+//            if (head == null || head.next == null) {
+//                return head;
+//            }
+//            ListNode newHead = reverseList(head.next);
+//            head.next.next = head;
+//            head.next = null;
+//            return newHead;
+//        }
+
+
         /**
-         * 递归
+         * 迭代 双指针
          */
         public ListNode reverseList(ListNode head) {
-            if (head == null || head.next == null) {
-                return head;
+            ListNode prev = null;
+            ListNode cur = head;
+            while (cur != null) {
+                ListNode tempNext = cur.next;
+
+                cur.next = prev;
+                prev = cur;
+                cur = tempNext;
             }
-            ListNode newHead = reverseList(head.next);
-            head.next.next = head;
-            head.next = null;
-            return newHead;
+            return prev;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
