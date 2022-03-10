@@ -36,21 +36,39 @@ public class LinkedListCycleIi{
  * }
  */
 public class Solution {
+//    /**
+//     * 哈希表
+//     */
+//    public ListNode detectCycle(ListNode head) {
+//        Set<ListNode> set = new HashSet<>();
+//        ListNode cur = head;
+//        while (cur != null) {
+//            if (set.contains(cur)) {
+//                return cur;
+//            } else {
+//                set.add(cur);
+//            }
+//            cur = cur.next;
+//        }
+//        return null;
+//    }
+
+
     /**
-     * 哈希表
+     * 双指针
+     *
+     * 链表头到交点前一个位置的结点个数 a
+     * 环内结点个数 b
+     *
+     * 假如指针 A 以1个结点的速度前进，指针B以2个结点的速度前进
+     *
+     * 假如
+     *    O -> O -> O -> O -> O -> O
+     *                     /       |
+     *                   O <- O <- O
      */
     public ListNode detectCycle(ListNode head) {
-        Set<ListNode> set = new HashSet<>();
-        ListNode cur = head;
-        while (cur != null) {
-            if (set.contains(cur)) {
-                return cur;
-            } else {
-                set.add(cur);
-            }
-            cur = cur.next;
-        }
-        return null;
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
