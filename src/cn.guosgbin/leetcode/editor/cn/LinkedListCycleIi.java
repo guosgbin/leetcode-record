@@ -68,7 +68,8 @@ public class Solution {
      *                   O <- O <- O
      */
     public ListNode detectCycle(ListNode head) {
-
+        // TODO-KWOK 待解
+        return null;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
