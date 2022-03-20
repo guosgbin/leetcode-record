@@ -71,3 +71,4 @@
  -[剑指 Offer 05. 替换空格](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
  -[151. 颠倒字符串中的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
  -[剑指 Offer 58 - II. 左旋转字符串](https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/)
+ -[28. 实现 strStr()](https://leetcode-cn.com/problems/implement-strstr/)
