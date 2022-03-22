@@ -87,15 +87,62 @@ public class ImplementQueueUsingStacks {
 //    }
 
 
+//    /**
+//     * 思路2
+//     * 先进先出
+//     *
+//     * stack1存元素， stack2只用来在添加元素的时候坐转换位置操作
+//     */
+//    class MyQueue {
+//        private Stack<Integer> stack1 = new Stack<>();
+//        private Stack<Integer> stack2 = new Stack<>();
+//
+//        public MyQueue() {
+//
+//        }
+//
+//        // 添加元素
+//        public void push(int x) {
+//            // 先将stack1的所有元素 倒到stack2中去
+//            // 将新添加的元素添加到 stack1 中，再把stack2的元素倒到stack1
+//            while (!stack1.isEmpty()) {
+//                stack2.push(stack1.pop());
+//            }
+//            stack1.push(x);
+//            while (!stack2.isEmpty()) {
+//                stack1.push(stack2.pop());
+//            }
+//        }
+//
+//        // 弹出队列开头元素
+//        public Integer pop() {
+//            if (stack1.isEmpty()) {
+//                return null;
+//            }
+//            return stack1.pop();
+//        }
+//
+//        public Integer peek() {
+//            if (stack1.isEmpty()) {
+//                return null;
+//            }
+//            return stack1.peek();
+//        }
+//
+//        public boolean empty() {
+//            return stack1.isEmpty();
+//        }
+//    }
+
+
     /**
-     * 思路2
+     * 思路3
      * 先进先出
-     *
-     * stack1存元素， stack2只用来在添加元素的时候坐转换位置操作
      */
     class MyQueue {
         private Stack<Integer> stack1 = new Stack<>();
         private Stack<Integer> stack2 = new Stack<>();
+        private Integer first;
 
         public MyQueue() {
 
@@ -103,37 +150,40 @@ public class ImplementQueueUsingStacks {
 
         // 添加元素
         public void push(int x) {
-            // 先将stack1的所有元素 倒到stack2中去
-            // 将新添加的元素添加到 stack1 中，再把stack2的元素倒到stack1
-            while (!stack1.isEmpty()) {
-                stack2.push(stack1.pop());
+            if (stack1.isEmpty()) {
+                first = x;
             }
+            // 添加元素添加到栈1，直接添加到栈1
             stack1.push(x);
-            while (!stack2.isEmpty()) {
-                stack1.push(stack2.pop());
-            }
         }
 
         // 弹出队列开头元素
         public Integer pop() {
-            if (stack1.isEmpty()) {
-                return null;
+            if (stack2.isEmpty()) {
+                // 假如栈2里面没有元素，就将栈1的元素倒到栈2中去，弹出栈2的元素
+                while (!stack1.isEmpty()) {
+                    stack2.push(stack1.pop());
+                }
             }
-            return stack1.pop();
+
+            if (stack2.isEmpty()) {
+                return null;
+            } else {
+                return stack2.pop();
+            }
         }
 
         public Integer peek() {
-            if (stack1.isEmpty()) {
-                return null;
+            if (stack2.isEmpty()) {
+                return first;
             }
-            return stack1.peek();
+            return stack2.peek();
         }
 
         public boolean empty() {
-            return stack1.isEmpty();
+            return stack1.isEmpty() && stack2.isEmpty();
         }
     }
-
 
 /**
  * Your MyQueue object will be instantiated and called as such:
