@@ -79,3 +79,4 @@
  - [232. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
  - [225. 用队列实现栈](https://leetcode-cn.com/problems/implement-stack-using-queues/)
  - [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+ - [1047. 删除字符串中的所有相邻重复项](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
