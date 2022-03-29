@@ -82,3 +82,4 @@
  - [1047. 删除字符串中的所有相邻重复项](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
  - [150. 逆波兰表达式求值](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/)
  - [239. 滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)
+ - [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
