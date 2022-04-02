@@ -1,7 +1,9 @@
 package cn.guosgbin.leetcode.editor.cn;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
@@ -56,11 +58,11 @@ class Solution {
      * @param root
      * @return
      */
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        traversal(root, list);
-        return list;
-    }
+//    public List<Integer> preorderTraversal(TreeNode root) {
+//        List<Integer> list = new ArrayList<>();
+//        traversal(root, list);
+//        return list;
+//    }
 
     public void traversal(TreeNode node, List<Integer> list) {
         if (node == null) {
@@ -70,6 +72,34 @@ class Solution {
         traversal(node.left, list);
         traversal(node.right, list);
     }
+
+
+    /**
+     * 前序遍历
+     * 迭代法
+     * 使用栈的结构，先进右节点，再进左节点，这样出栈的顺序就是 左节点在前了
+     */
+    public List<Integer> preorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            list.add(node.val);
+            if (node.right != null) {
+                stack.add(node.right);
+            }
+            if (node.left != null) {
+                stack.add(node.left);
+            }
+        }
+
+        return list;
+    }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
