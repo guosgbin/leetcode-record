@@ -1,7 +1,9 @@
 package cn.guosgbin.leetcode.editor.cn;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @author Dylan Kwok
@@ -49,11 +51,11 @@ class Solution {
      * 出口：结点为null
      * 每次调用做什么，后续遍历 左右中
      */
-    public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        traversal(root, list);
-        return list;
-    }
+//    public List<Integer> postorderTraversal(TreeNode root) {
+//        List<Integer> list = new ArrayList<>();
+//        traversal(root, list);
+//        return list;
+//    }
 
     public void traversal(TreeNode node, List<Integer> list) {
         if (node == null) {
@@ -62,6 +64,39 @@ class Solution {
         traversal(node.left, list);
         traversal(node.right, list);
         list.add(node.val);
+    }
+
+    /**
+     * 后续遍历迭代法
+     *
+     * 后续遍历是 左右中
+     * 前序遍历是 中左右
+     *
+     * 先按照 中右左 来遍历得到list，再将集合反转就是  左右中，也就是后续遍历了
+     *
+     * @param root
+     * @return
+     */
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if (root == null) {
+            return list;
+        }
+
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            list.add(node.val);
+            if (node.left != null) {
+                stack.add(node.left);
+            }
+            if (node.right != null) {
+                stack.add(node.right);
+            }
+        }
+        Collections.reverse(list);
+        return list;
     }
 
 }
