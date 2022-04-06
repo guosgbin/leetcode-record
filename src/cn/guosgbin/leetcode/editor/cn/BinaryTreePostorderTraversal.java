@@ -66,36 +66,72 @@ class Solution {
         list.add(node.val);
     }
 
+//    /**
+//     * 后续遍历迭代法
+//     *
+//     * 后续遍历是 左右中
+//     * 前序遍历是 中左右
+//     *
+//     * 先按照 中右左 来遍历得到list，再将集合反转就是  左右中，也就是后续遍历了
+//     *
+//     * @param root
+//     * @return
+//     */
+//    public List<Integer> postorderTraversal(TreeNode root) {
+//        List<Integer> list = new ArrayList<>();
+//        Stack<TreeNode> stack = new Stack<>();
+//        if (root == null) {
+//            return list;
+//        }
+//
+//        stack.add(root);
+//        while (!stack.isEmpty()) {
+//            TreeNode node = stack.pop();
+//            list.add(node.val);
+//            if (node.left != null) {
+//                stack.add(node.left);
+//            }
+//            if (node.right != null) {
+//                stack.add(node.right);
+//            }
+//        }
+//        Collections.reverse(list);
+//        return list;
+//    }
+
     /**
-     * 后续遍历迭代法
+     * 前序遍历
+     * 迭代法 2
+     * 使用栈的结构，先进右节点，再进左节点，这样出栈的顺序就是 左节点在前了
      *
-     * 后续遍历是 左右中
-     * 前序遍历是 中左右
-     *
-     * 先按照 中右左 来遍历得到list，再将集合反转就是  左右中，也就是后续遍历了
-     *
-     * @param root
-     * @return
+     * 统一套路
      */
     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
         if (root == null) {
             return list;
         }
-
         stack.add(root);
         while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            list.add(node.val);
-            if (node.left != null) {
-                stack.add(node.left);
-            }
-            if (node.right != null) {
-                stack.add(node.right);
+            TreeNode cur = stack.peek();
+            if (cur != null) {
+                // 后序遍历 -> 左右中 -> 那么入栈就是 中右左
+                TreeNode node = stack.pop();
+                stack.push(node);
+                stack.push(null);
+                if (node.right != null) {
+                    stack.push(node.right);
+                }
+                if (node.left != null) {
+                    stack.push(node.left);
+                }
+            } else {
+                stack.pop();
+                TreeNode node = stack.pop();
+                list.add(node.val);
             }
         }
-        Collections.reverse(list);
         return list;
     }
 

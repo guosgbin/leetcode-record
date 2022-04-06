@@ -59,29 +59,67 @@ class Solution {
 
     }
 
+//    /**
+//     * 中序遍历迭代法
+//     *
+//     */
+//    public List<Integer> inorderTraversal (TreeNode root){
+//        Stack<TreeNode> stack = new Stack<>();
+//        List<Integer> list = new ArrayList<>();
+//        if (root == null) {
+//            return list;
+//        }
+//        TreeNode cur = root;
+//        while (cur != null || !stack.isEmpty()) {
+//            if (cur != null) {
+//                // 表示左子结点有数据
+//                // 添加到栈
+//                stack.add(cur);
+//                cur = cur.left;
+//            } else {
+//                // 说明当前结点没有左子结点了，添加元素
+//                TreeNode node = stack.pop();
+//                list.add(node.val);
+//                // 遍历右子树
+//                cur = node.right;
+//            }
+//        }
+//        return list;
+//    }
+
+
+
     /**
-     * 中序遍历迭代法
+     * 中序遍历
+     * 迭代法 2
+     * 使用栈的结构，先进右节点，再进左节点，这样出栈的顺序就是 左节点在前了
      *
+     * 统一套路
      */
-    public List<Integer> inorderTraversal (TreeNode root){
+    public List<Integer> inorderTraversal(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
         List<Integer> list = new ArrayList<>();
         if (root == null) {
             return list;
         }
-        TreeNode cur = root;
-        while (cur != null || !stack.isEmpty()) {
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.peek();
             if (cur != null) {
-                // 表示左子结点有数据
-                // 添加到栈
-                stack.add(cur);
-                cur = cur.left;
+                // 前序遍历 -> 左中右 -> 那么入栈就是 右中左
+                TreeNode node = stack.pop();
+                if (node.right != null) {
+                    stack.push(node.right);
+                }
+                stack.push(node);
+                stack.push(null);
+                if (node.left != null) {
+                    stack.push(node.left);
+                }
             } else {
-                // 说明当前结点没有左子结点了，添加元素
+                stack.pop();
                 TreeNode node = stack.pop();
                 list.add(node.val);
-                // 遍历右子树
-                cur = node.right;
             }
         }
         return list;

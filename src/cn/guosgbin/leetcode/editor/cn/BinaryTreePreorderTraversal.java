@@ -74,10 +74,38 @@ class Solution {
     }
 
 
+//    /**
+//     * 前序遍历
+//     * 迭代法
+//     * 使用栈的结构，先进右节点，再进左节点，这样出栈的顺序就是 左节点在前了
+//     */
+//    public List<Integer> preorderTraversal(TreeNode root) {
+//        Stack<TreeNode> stack = new Stack<>();
+//        List<Integer> list = new ArrayList<>();
+//        if (root == null) {
+//            return list;
+//        }
+//        stack.add(root);
+//        while (!stack.isEmpty()) {
+//            TreeNode node = stack.pop();
+//            list.add(node.val);
+//            if (node.right != null) {
+//                stack.add(node.right);
+//            }
+//            if (node.left != null) {
+//                stack.add(node.left);
+//            }
+//        }
+//
+//        return list;
+//    }
+
     /**
      * 前序遍历
-     * 迭代法
+     * 迭代法 2
      * 使用栈的结构，先进右节点，再进左节点，这样出栈的顺序就是 左节点在前了
+     *
+     * 统一套路
      */
     public List<Integer> preorderTraversal(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
@@ -87,19 +115,26 @@ class Solution {
         }
         stack.add(root);
         while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            list.add(node.val);
-            if (node.right != null) {
-                stack.add(node.right);
-            }
-            if (node.left != null) {
-                stack.add(node.left);
+            TreeNode cur = stack.peek();
+            if (cur != null) {
+                // 前序遍历 -> 中左右 -> 那么入栈就是 右左中
+                TreeNode node = stack.pop();
+                if (node.right != null) {
+                    stack.push(node.right);
+                }
+                if (node.left != null) {
+                    stack.push(node.left);
+                }
+                stack.push(node);
+                stack.push(null);
+            } else {
+                stack.pop();
+                TreeNode node = stack.pop();
+                list.add(node.val);
             }
         }
-
         return list;
     }
-
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
