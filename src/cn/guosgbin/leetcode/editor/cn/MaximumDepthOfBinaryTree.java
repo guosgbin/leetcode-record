@@ -85,7 +85,7 @@ class Solution {
     }
 
     /**
-     * 中序遍历
+     * 后续遍历
      */
     public int getdepth(TreeNode node) {
         if (node == null) {
