@@ -101,3 +101,4 @@
  - [226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)
  - [101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)
  - [100. 相同的树](https://leetcode-cn.com/problems/same-tree/)
+ - [222. 完全二叉树的节点个数](https://leetcode-cn.com/problems/count-complete-tree-nodes/)
