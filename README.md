@@ -106,3 +106,4 @@
  - [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/)
  - [404. 左叶子之和](https://leetcode.cn/problems/sum-of-left-leaves/)
  - [513. 找树左下角的值](https://leetcode.cn/problems/find-bottom-left-tree-value/)
+ - [112. 路径总和](https://leetcode.cn/problems/path-sum/)
