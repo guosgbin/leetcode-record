@@ -43,23 +43,15 @@ public class MaximumBinaryTree{
     class Solution {
         /**
          * 递归
-         *
-         * 入参和返回值：没有返回值，入参是 左边的数组，和右边的数组，和中间的结点
-         * 出口是：中间的结点是null
-         * 单层逻辑：首先找出两个数组吧，找出最大值和左右数组
          */
         public TreeNode constructMaximumBinaryTree(int[] nums) {
             return constructMaximumBinaryTree(nums, 0, nums.length);
         }
 
         public TreeNode constructMaximumBinaryTree(int[] nums, int leftIndex, int rightIndex) {
-            if (rightIndex - leftIndex < 1) {
+            if (rightIndex == leftIndex) {
                 // 没有元素了
                 return null;
-            }
-            if (rightIndex - leftIndex == 1) {
-                // 只有一个元素了
-                return new TreeNode(nums[leftIndex]);
             }
 
             // 找出最大值的索引
@@ -74,7 +66,9 @@ public class MaximumBinaryTree{
 
             TreeNode root = new TreeNode(max);
             // 根据maxIndex划分左右子树
+            // 左闭右开：[left, maxValueIndex)
             root.left = constructMaximumBinaryTree(nums, leftIndex, maxIndex);
+            // 左闭右开：[maxValueIndex + 1, right)
             root.right = constructMaximumBinaryTree(nums, maxIndex + 1, rightIndex);
             return root;
         }
