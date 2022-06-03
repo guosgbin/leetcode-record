@@ -102,8 +102,50 @@ class Solution {
 //    }
 
 
+//    /**
+//     * 迭代法 - 可以，但是不好理解
+//     */
+//    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+//        if (root1 == null) {
+//            return root2;
+//        }
+//        if (root2 == null) {
+//            return root1;
+//        }
+//
+//        Queue<TreeNode> queue = new LinkedList<>();
+//        queue.offer(root1);
+//        queue.offer(root2);
+//        while (!queue.isEmpty()) {
+//            TreeNode node1 = queue.poll();
+//            TreeNode node2 = queue.poll();
+//            // 此时两个节点一定不为空，val相加
+//            node1.val = node1.val + node2.val;
+//            // 如果两棵树左节点都不为空，加入队列
+//            if (node1.left != null && node2.left != null) {
+//                queue.offer(node1.left);
+//                queue.offer(node2.left);
+//            }
+//            // 如果两棵树右节点都不为空，加入队列
+//            if (node1.right != null && node2.right != null) {
+//                queue.offer(node1.right);
+//                queue.offer(node2.right);
+//            }
+//            // 若node1的左节点为空，直接赋值
+//            if (node1.left == null && node2.left != null) {
+//                node1.left = node2.left;
+//            }
+//            // 若node2的左节点为空，直接赋值
+//            if (node1.right == null && node2.right != null) {
+//                node1.right = node2.right;
+//            }
+//        }
+//        return root1;
+//    }
+
     /**
-     * 迭代法 - 可以，但是不好理解
+     * 迭代法
+     * 两个队列
      */
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if (root1 == null) {
@@ -112,35 +154,54 @@ class Solution {
         if (root2 == null) {
             return root1;
         }
-
-        Queue<TreeNode> queue = new LinkedList<>();
+        // 如果都存在节点，创建一个新的节点存储合并后的值
+        TreeNode root = new TreeNode(root1.val + root2.val);
+        // 初始化队列
+        Queue<TreeNode> queueMerge = new LinkedList<TreeNode>();
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queueMerge.offer(root);
         queue.offer(root1);
         queue.offer(root2);
+
         while (!queue.isEmpty()) {
+            TreeNode mergeNode = queueMerge.poll();
             TreeNode node1 = queue.poll();
             TreeNode node2 = queue.poll();
-            // 此时两个节点一定不为空，val相加
-            node1.val = node1.val + node2.val;
-            // 如果两棵树左节点都不为空，加入队列
-            if (node1.left != null && node2.left != null) {
-                queue.offer(node1.left);
-                queue.offer(node2.left);
+            if (node1.left != null || node2.left != null) {
+                if (node1.left != null && node2.left != null) {
+                    // 两个结点的 left 结点都存在
+                    TreeNode leftMerge  = new TreeNode(node1.left.val + node2.left.val);
+                    mergeNode.left = leftMerge;
+                    queueMerge.offer(leftMerge);
+                    queue.offer(node1.left);
+                    queue.offer(node2.left);
+                } else if (node1.left != null && node2.left == null) {
+                    // node1的left存在，node2的left不存在
+                    mergeNode.left = node1.left;
+                } else if (node1.left == null && node2.left != null) {
+                    // node1的left不存在，node2的left存在
+                    mergeNode.left = node2.left;
+                }
             }
-            // 如果两棵树右节点都不为空，加入队列
-            if (node1.right != null && node2.right != null) {
-                queue.offer(node1.right);
-                queue.offer(node2.right);
-            }
-            // 若node1的左节点为空，直接赋值
-            if (node1.left == null && node2.left != null) {
-                node1.left = node2.left;
-            }
-            // 若node2的左节点为空，直接赋值
-            if (node1.right == null && node2.right != null) {
-                node1.right = node2.right;
+            if (node1.right != null || node2.right != null) {
+                if (node1.right != null && node2.right != null) {
+                    // 两个结点的 right 结点都存在
+                    TreeNode rightMerge  = new TreeNode(node1.right.val + node2.right.val);
+                    mergeNode.right = rightMerge;
+                    queueMerge.offer(rightMerge);
+                    queue.offer(node1.right);
+                    queue.offer(node2.right);
+                } else if (node1.right != null && node2.right == null) {
+                    // node1的right存在，node2的right不存在
+                    mergeNode.right = node1.right;
+                } else if (node1.right == null && node2.right != null) {
+                    // node1的right不存在，node2的right存在
+                    mergeNode.right = node2.right;
+                }
             }
         }
-        return root1;
+
+        return root;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
