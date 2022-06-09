@@ -113,3 +113,4 @@
  - [700. 二叉搜索树中的搜索](https://leetcode.cn/problems/search-in-a-binary-search-tree/)
  - [98. 验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/) 
  - [530. 二叉搜索树的最小绝对差](https://leetcode.cn/problems/minimum-absolute-difference-in-bst/)
+ - [501. 二叉搜索树中的众数](https://leetcode.cn/problems/find-mode-in-binary-search-tree/)
